@@ -1,0 +1,67 @@
+<form #signup="ngForm" (ngSubmit)="signup['valid'] && onSubmit()">
+    <!--
+    <div>
+        Form submitted ? {{signup['submitted']}}
+        Form valid ? {{signup['valid']}}
+        Form invalid ? {{signup['invalid']}}
+    </div>
+    -->
+
+    <fieldset>
+        <label for="userLastName">Nom</label>
+        <input id="userLastName" name="userLastName" type="text" [(ngModel)]="model.lastName" #userLastName="ngModel"
+            required minlength="3" maxlength="15" />
+    </fieldset>
+
+    <!-- Message d'erreurs de userLastName -->
+    <div *ngIf="signup['submitted'] && userLastName.errors">
+        <span *ngIf="userLastName.errors?.['required']">Le {{model.lastName}} est requis.</span>
+        <span *ngIf="userLastName.errors?.['minlength']">Le {{model.lastName}} doit comporter au moins 3
+            caractères.</span>
+        <span *ngIf="userLastName.errors?.['maxlength']">Le {{model.lastName}} ne doit pas dépasser 15
+            caractères.</span>
+    </div>
+
+
+    <fieldset>
+        <label for="userFirstName">Prénom</label>
+        <input id="userFirstName" name="userFirstName" type="text" [(ngModel)]="model.firstName"
+            #userFirstName="ngModel" required minlength="3" maxlength="15" />
+    </fieldset>
+
+    <!-- Message d'erreurs de userFirstName -->
+    <div *ngIf="signup['submitted'] && userFirstName.errors">
+        <span *ngIf="userFirstName.errors?.['required']">Le {{model.firstName}}est requis.</span>
+        <span *ngIf="userFirstName.errors?.['minlength']">Le {{model.firstName}} doit comporter au moins 3
+            caractères.</span>
+        <span *ngIf="userFirstName.errors?.['maxlength']">Le {{model.firstName}} ne doit pas dépasser 15
+            caractères.</span>
+    </div>
+
+    <fieldset>
+        <label for="userEmail">Email</label>
+        <input id="userEmail" name="userEmail" type="email" [(ngModel)]="model.email" #userEmail="ngModel" required
+            email />
+    </fieldset>
+
+    <!-- Message d'erreurs de userEmail -->
+    <div *ngIf="signup['submitted'] && userEmail.errors">
+        <span *ngIf="userEmail.errors?.['required']">Le {{model.email}}est requis.</span>
+        <span *ngIf="userEmail.errors?.['email']">L'adresse email est invalide.</span>
+    </div>
+
+
+    <fieldset>
+        <label for="userPassword">Mot de passe</label>
+        <input id="userPassword" name="userPassword" type="text" [(ngModel)]="model.password" #userPassword="ngModel"
+            required />
+    </fieldset>
+
+    <!-- Message d'erreurs de userPassword -->
+    <div *ngIf="signup['submitted'] && userPassword.errors">
+        <span *ngIf="userPassword.errors?.['required']">Le {{model.password}} est requis.</span>
+    </div>
+
+    <button type="reset">Restaurer</button>
+    <button type="submit">Sauvegarder</button>
+</form>
